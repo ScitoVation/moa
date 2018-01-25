@@ -1,0 +1,206 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>Kohonen and CPANN toolbox</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="generator" content="HAPedit 3.0">
+
+<link href = "style_structure.css" rel="stylesheet" type="text/css">
+<link href = "style_text.css" rel="stylesheet" type="text/css">
+<link href = "style_tables.css" rel="stylesheet" type="text/css">
+
+<style type="text/css">
+<!--
+.style1 {
+	color: #FF0000;
+	font-weight: bold;
+}
+-->
+</style>
+</head>
+<body>
+<div id="container">
+<a name="top"></a>
+
+    <div id="header">
+		<iframe src="header.htm" width="740" height="60" scrolling="no" frameborder="0">
+  			no i_frames allowed :: change browser
+	  	</iframe>
+    </div>
+
+    <div id="content">
+
+		<table width="740" border="0" cellpadding="0" cellspacing="0">
+  		<tr>
+		<td width="150" valign="top">
+		
+		<iframe src="menu_lateral.htm" width="135" height="340" scrolling="no" frameborder="0">
+  			no i_frames allowed :: change browser
+	  	</iframe>
+		
+		</td>
+
+    	<td valign="top">
+
+		  <div align="justify">
+		    <div id="tab_duo_contenitor" class="text">
+		    <span class="title_page">How to start </span>		
+		    <BR>
+		    <BR>
+    
+		<div id="tab_duo_text">
+		      <div id="tab_space_lateral"><a href="#sub_1" class="lnk_text">Data structure</a></div>
+		      <div id="tab_space_lateral"><a href="#sub_1_bis" class="lnk_text">Data scaling</a></div>	   
+			  <div id="tab_space_lateral"><a href="#sub_1_tris" class="lnk_text">How to start the graphical interface</a></div>	  	
+		      <div id="tab_space_lateral"><a href="#sub_2" class="lnk_text">How to prepeare the  neural network settings</a></div>	   	</div>
+    
+		<BR><a name="sub_1"></a>
+		    <BR>
+		    
+		<span class="title_paragraph">Data structure </span>
+		    <BR>
+		    <BR>
+		    The dataset  is defined as samples (rows) x variables (columns). If CP-ANNs are adopted, you have to input also a class vector; the class vector has dimensions samples x 1. Class labels must be numerical. If G classes are present, class labels must range from 1 to G (0 values are not allowed). Type:<BR>
+		    <BR>
+			
+			<div id="tab_duo_text" class="text_math">
+		      load iris </div>
+			<BR>
+		    on the MATLAB command window to see an example of data structure.<BR>
+			Both sample and variable labels can be used to visualize the results. Labels must bu structured as cell array vectors with a number of entries equal to the number of samples or variables. In the iris file, examples of sample and variable labels are stored. However, if you wish to prepeare your own lables, type the following in the matlab command window. If we have a data matrix called X, in order to prepeare the sample lables, we can type:
+			<BR>
+			<BR>
+			<div id="tab_duo_text" class="text_math">
+		      for i=1:size(X,1); label{i}=['my label number ' num2str(i)]; end; label = label';</div>
+			  <BR>
+		    <BR>
+			[<a href="#top" class="lnk_text">-> top</a>]
+
+		<BR>
+		<BR><a name="sub_1_bis"></a>
+		    <BR>
+		    
+		<span class="title_paragraph">Data scaling </span>
+		    <BR>
+		    <BR>         
+			<span class="style1">PAY ATTENTION</span>: data can be scaled. However, the scaled data are then always range scaled inbetween 0 and 1, in order to make them comparable with the net weights.
+			<BR>
+			<BR>
+		    <BR>
+			[<a href="#top" class="lnk_text">-> top</a>]
+
+<BR>
+		<BR><a name="sub_1_tris"></a>
+		    <BR>
+		    
+		<span class="title_paragraph">How to start the graphical interface </span>
+		    <BR>
+		    <BR>         
+			The toolbox can work both with the MATLAB command window and with its  graphical interface. The graphical interface enables you to do all the steps of the analysis (data loading, setting preparation, model calculation, sample prediction, cross-validation). If you wish to use the graphical interface, <a href="gui.htm" class="lnk_text">read the corresponding help section</a>.
+			<BR>
+			<BR>
+		    <BR>
+			[<a href="#top" class="lnk_text">-> top</a>]
+
+		    <BR>
+		    <BR> <a name="sub_2"></a>
+		    <BR>
+		    
+		<span class="title_paragraph">How to prepeare the neural network settings</span>
+		    <BR>
+		    <BR>
+		    Some settings must be defined in order to run both Kohonen Maps and CP-ANNs; in order to create a default setting structure, type on the MATLAB command window:
+		    <BR>
+			<BR>
+			<div id="tab_duo_text" class="text_math">
+		      settings = som_settings('kohonen')
+			</div>
+			<BR>
+			if you're going to use Kohonen maps, or
+		    <BR>
+			<BR>
+			<div id="tab_duo_text" class="text_math">
+		      settings = som_settings('cpann')
+			</div>
+			<BR>
+			for CP-ANNs. <BR>A default structure with the following fields will be built:
+
+			<BR><BR>
+			<B>settings.nsize</B><BR>
+			net size (default value is NaN). This is the number of neurons for each side of the map. Taking into consideration that the map is a square, if you enter:
+			<BR><BR>
+			<div id="tab_duo_text" class="text_math">
+		      settings.nsize = 7;
+			</div><BR>
+			you'lle get a total number of neurons equal to 7*7 = 49.
+
+			<BR><BR>
+			<B>settings.epochs</B><BR>
+			number of epochs (default value is NaN). This defines the number of times the objects will be introduced in the net. For example, in order to train a net with 100 epochs, type:
+			<BR><BR>
+			<div id="tab_duo_text" class="text_math">
+		      settings.epochs = 100;
+			</div>
+            <BR>
+<span class="style1">PAY ATTENTION</span>: since both settings.nsize and settings.epochs have no default values, these settings must be always defined by the user before running a model. Consider that in this toolbox, a new strategy for the selection of the optimal number of epochs and neurons of classification  models is provided. <a href="optimisation.htm" class="lnk_text">Read the corresponding help section here</a>.<BR>
+			<BR>
+            <B>settings.topol</B><BR>
+topology condition ('square' or 'hexagonal') (default is 'square'). This defines the shape of each neuron, as shown in this figure where there is a 4x4 network with 'hexagonal' topology on the left and a 4x4 network with 'square' topology on the right.  <span class="style1">PAY ATTENTION</span>: if 'hexagonal' topology and 'toroidal' boundary condition are selected, an even number of neurons must be defined.<BR>
+<img src="start_topology.gif" width="600" height="288"><BR>
+<B>settings.bound</B><BR>
+boundary condition ('toroidal' or 'normal', defualt is 'toroidal'). Toroidal means that each edge of the map has to be seen as connected with the opposite one. <BR>
+<a name="training" id="training"></a><BR>
+<B>settings.training</B><BR>
+defines the algorithm for training the network weights ('sequential' or 'batch', default is 'batch'). Sequential training: in each training step, samples are presented to the network, one at a time and weights are updated on the basis of the winner neuron. Batch training: the whole  set of samples is presented to the network and winner neurons are found; after this, the map weights are updated with the  effect of all the samples. The batch algorithm is  faster than the  sequential algorithm. Moreover, the batch algorithm in association with the eigenvector initialisation of weights give always the same map results, since randomisation is avoided. Details on the training algorithms are given in the <a href="theory.htm" class="lnk_text">theory section</a>. <BR>
+<a name="init"></a><BR>         
+			<B>settings.init</B><BR>
+			defines the initialisation of the Kohonen weights. Kohonen weights can be initialised randomly between 0.1 and 0.9 (settings.init = 'random', default value) or on the basis of  the eigenvectors corresponding to the two largest principal components of input data (settings.init = 'eigen'). In this second case, weights are always intialised to the same values. Details on this strategy are given here: Kohonen, T. (1995). Self-Organizing Maps. Series in Information Sciences, Vol. 30. Springer, Heidelberg. Second ed. 1997.<BR>
+			<BR>            
+			<B>settings.a_max</B> and <B>settings.a_min</B><BR>
+			are the initial learning rate (defualt value equal to 0.5) and the final learning rate (defualt value equal to 0.01), as suggested by Zupan, Novic and Ruisánchez in "Kohonen and counterpropagation artificial neural networks in analytical chemistry", Chemometrics and Intelligent Laboratory Systems (1997) 38 1-23.
+
+			<BR>
+			<BR>   
+			<B>settings.scaling</B><B></B><BR>
+			defines the data scaling to be applied to the dataset, prior to the automatic range scaling, i.e. data can be scaled, but then are always range scaled in order to make them comparable with the net weights. Default value is 'none' (i.e. no scaling prior to range scaling of the data),  'cent' for centering, 'scal' for variance scaling, 'auto' for autoscaling (centering + variance scaling).<BR>
+			<BR>
+			<B>settings.absolute_range</B><B></B><BR>
+ defines the type of automatic range scaling. If absolute_range = 0 (default), the range scaling is applied separatly on each column (variable) of the dataset.  If absolute_range = 1, the range scaling is applied on the absolute maximum and minimum values of the data. This second option is suitable when dealing with profiles and spectra. The classical range scaling (absolute_range = 0) would scale each point of the profile, giving the same importance to all the profile points. It would be better to apply an absolute range scaling (absolute_range = 1), in order to preserve the profile information and shape. As an example, the profiles of six samples (constituted by 100 points) are shown (first figure). The profiles range in between 0 and 0.06. The result after scaling the data with absolute range scaling is shown in figure 2, while classical range scaling is shown in figure 3. <BR>
+			<BR>
+			<center><img src="range_scaling_original.gif" width="466" height="243"><BR>
+			<img src="range_scaling_absolute.gif" width="466" height="243"><BR>
+			<img src="range_scaling_normal.gif" width="466" height="242"></center>
+			<BR>    
+			<B>settings.show_bar</B><B></B><BR>
+			defines the presence of a waiting bar during the model calculation. If show_bar = 0 (default), the trained epochs are shown on the command window. On the other hand,  if show_bar = 1, the waitbar is shown.<BR>
+			<BR>
+            <B>settings.scalar</B><B></B><BR>
+only for <a href="skn.htm" class="lnk_text">Supervised Kohonen netwroks</a> (SKNs). It is a coefficient for tuninng the effect of output map (class membership) on the input map, when they are glued. Its defualt value is 1, taking into account that in this toolbox data are always range scaled between 0 and 1.<BR>
+<BR>         
+			<B>settings.ass_meth</B><BR>
+			only for CP-ANNs. This is the assignment method used to define which class each neuron belongs to.<BR>If settings.ass_meth = 1 (defualt value) each neuron is assigned to the class with the maximum output weight.
+			<BR>
+			If settings.ass_meth = 2, the neuron is assigned if the difference between the highest output weight and the second highest output weight is higher then a defined threshold (0.3). <BR>
+			If settings.ass_meth = 3, the neuron is assigned to the class with the maximum output weight, only if this is higher then a defined threshold (0.5).<BR>
+			If settings.ass_meth = 4, the neuron is assigned on the basis of a smoothing function. <a href="start_example.htm" class="lnk_text">An example of assignment is given here</a>.<BR>
+            <BR>
+			[<a href="#top" class="lnk_text">-> top</a>]		    
+    		    <BR>
+		    <BR>
+			<BR>&nbsp;  	     
+		 </div>
+  
+		  </div></td>
+  		</tr>
+	  </table>
+
+    </div>
+
+    <div id="footer">
+		<iframe src="footer.htm" width="700" height="13" scrolling="no" frameborder="0">
+  			no i_frames allowed :: change browser
+	  	</iframe>
+	</div>
+</div>
+</body>
+</html>

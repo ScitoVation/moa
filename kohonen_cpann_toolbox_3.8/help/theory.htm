@@ -1,0 +1,188 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>Kohonen and CPANN toolbox</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="generator" content="HAPedit 3.0">
+
+<link href = "style_structure.css" rel="stylesheet" type="text/css">
+<link href = "style_text.css" rel="stylesheet" type="text/css">
+<link href = "style_tables.css" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+<div id="container">
+<a name="top"></a>
+
+    <div id="header">
+		<iframe src="header.htm" width="740" height="60" scrolling="no" frameborder="0">
+  			no i_frames allowed :: change browser
+	  	</iframe>
+    </div>
+
+    <div id="content">
+
+		<table width="740" border="0" cellpadding="0" cellspacing="0">
+  		<tr>
+		<td width="150" valign="top">
+		
+		<iframe src="menu_lateral.htm" width="135" height="340" scrolling="no" frameborder="0">
+  			no i_frames allowed :: change browser
+	  	</iframe>
+		
+		</td>
+
+    	<td valign="top">
+
+		  <div align="justify">
+		    <div id="tab_duo_contenitor" class="text">
+		    <span class="title_page">Theory</span>		
+		    <BR>
+		    <BR>
+    
+		<div id="tab_duo_text">
+		      <div id="tab_space_lateral"><a href="#sub_1" class="lnk_text">Neural Networks</a></div>
+		      <div id="tab_space_lateral"><a href="#sub_2" class="lnk_text">Kohonen Maps</a></div>
+		      <div id="tab_space_lateral"><a href="#sub_3" class="lnk_text">Counterpropagation Artificial Neural Networs (CP-ANNs)</a></div>
+			  <div id="tab_space_lateral"><a href="#sub_4" class="lnk_text">Supervised Kohonen networks (SKN)</a></div>
+			  <div id="tab_space_lateral"><a href="#sub_5" class="lnk_text">XY-fused networks (XY-F)</a></div>
+	   	</div>
+    
+		<BR><a name="sub_1"></a>
+		    <BR>
+		    
+		<span class="title_paragraph">Neural Networs</span>
+		    <BR>
+		    <BR>
+		    Artificial Neural networks (ANNs) can solve both supervised and unsupervised problems, such as clustering and modeling of qualitative responses (classification).
+			Basically, ANN is supposed to mimic the action of a biological network of neurons, where each neuron accepts different signals from neighbouring neurons. 
+			Each neuron can give an output signal: the function which calculates the output vector from the input vector is composed of two parts; 
+			the first part evaluates the net input and is a linear combination of the input variables, multiplied with coefficients called weights; the second part transfers the net input in a non-linear manner to the output vector.
+			Artificial neural networks can be composed of different numbers of neurons, placed into one or more layers.
+			<BR>
+			Among ANN learning strategies, Kohonen Maps and Counterpropagation Artificial Neural Networks are two of the most popular approaches.
+		
+		    <BR>
+		    <BR>
+			[<a href="#top" class="lnk_text">-> top</a>]
+		    <BR>
+		    <BR> <a name="sub_2"></a>
+		    <BR>
+		    
+		<span class="title_paragraph">Kohonen maps</span>
+		    <BR>
+		    <BR>
+			Kohonen Maps are self-organising systems applied to the unsupervised problems (cluster analysis and data structure analysis). 
+			In Kohonen maps similar input objects are linked to the topological close neurons in the network. 
+			Basically,  the neurons have as many weights as 
+			the number of responses in the target vectors and learn to identify the location in the ANN that is most similar to the input vectors; the weights of the net are updated on the basis of the input object, i.e.  the network is modified each time an object is introduced and all the objects are introduced for a certian number of times (epochs).			An example of the structure of a Kohonen map with dimension 5x5, built for a dataset described by <em>p</em> variables is shown in the following picture.<BR>
+			<BR>
+			<center><img src="theory_kohonen.gif" width="350" height="264" border="1"></center>	
+			<BR>
+			The Kohonen map is usually characterized by being a squared (or hexagonal) toroidal space, that consists of a grid of <em>N<sup>2</sup></em> neurons, where <em>N</em> is the number of neurons for each side of the squared space. Each neuron contains as many elements (weights) as the number of input variables. The weights of each neuron are randomly initialised between 0 and 1 and updated on the basis of the input vectors (i.e. samples), for a certain number of times (called training epochs). Both the number of neurons and epochs to be used to train the map must be defined by the user. Kohonen maps can be trained by means of sequential or batch training algorithms. <BR>
+			When the <em>sequential training</em> is adopted, in each training step samples are presented to the network, one at a time and weights are updated on the basis of the winner neuron.
+			In each training step, samples are presented to the network, one at a time. For each sample (<strong>x</strong><sub><i>i</i></sub>), the most similar neuron (i.e. the winning neuron) is selected on the basis of the Euclidean distance. Then, the weights of the r-th neuron (<strong>w</strong><sub><i>r</i></sub>) are changed as a function of the difference between their values and the values of the sample; this correction (&Delta;<strong>w</strong><sub><i>r</i></sub>) is scaled according to the topological distance from the winning neuron (<em>d</em><sub><i>r</i></sub>):<br>
+			<center><img src="theory_formula_1.gif" width="233" height="60"></center>
+			where <em>&eta;</em> is the learning rate and <em>d<sub>max</sub></em> the size of the considered neighbourhood, that decreases during the training phase. The topological distance <em>d</em><sub><i>r</i></sub> is defined as the number of neurons between the considered neuron <em>r</em> and the winning neuron. The learning rate <em>&eta;</em> changes during the training phase, as follows:<br>
+            <center>
+              <img src="theory_formula_2.gif" width="236" height="57">
+            </center>
+            where <em>t</em> is the number of the current training epoch, <em>t<sub>tot</sub></em> is the total number of training epochs, <em>&eta;<sup>start</sup></em> and <em>&eta;<sup>final</sup></em> are the learning rate at the beginning and at the end of the training, respectively.<BR>
+            When the <em>batch training</em> is used, the whole set of samples is presented to the network and winner neurons are found; after this, the map weights are updated with the effect of all the samples:<BR>
+            <center><img src="theory_formula_4.gif" width="117" height="89"></center>
+            where <strong>w</strong><sub><i>r</i></sub> are the updated weights of the r-th neuron, <strong>x</strong><sub><i>i</i></sub> is the i-th sample, <em>I</em> is the total number of samples and <em>u<sub>i</sub></em> is the weighting factor of the winning neuron related to sample <em>i</em> with respect  to neuron <em>r</em>: <BR>
+            <center><img src="theory_formula_5.gif" width="149" height="54"></center>
+            where, <em>&eta;</em>, <em>d<sub>max</sub></em> and <em>d</em><sub><i>r</i></sub> are defined as before. <BR>At the end of the network training, samples are placed in the most similar neurons of the Kohonen map; in this way data structure can be visualised and the role of the experimental variables in defining the data structure can be elucidated by looking at the Kohonen weights.<BR>			
+            The <strong>Kohonen and CP-ANN toolbox</strong> builds  Kohonen maps in the same way as described in the following paper:<BR>
+			<BR>
+			Zupan J, Novic M, Ruis&aacute;nchez I. (<strong>1997</strong>) Kohonen and counterpropagation artificial neural networks in analytical chemistry. <em>Chemometrics and Intelligent Laboratory Systems</em> <strong>38</strong> 1-23.<BR>
+			<BR>
+			In order to use Kohonen maps, read  <a href="kohonen.htm" class="lnk_text">how to build them by means of the <strong>Kohonen and CP-ANN toolbox</strong></a>.<BR>
+		    <BR>
+			[<a href="#top" class="lnk_text">-> top</a>]		    
+    		    <BR>
+		        <BR>
+		        <a name="sub_3"></a>
+		        <BR>
+		    
+		        <span class="title_paragraph">Counterpropagation Artificial Neural Networks</span>
+		        <BR>
+		        <BR>
+			Counterpropagation Artificial Neural Networks (CP-ANNs) are very similar to the Kohonen Maps and are essentially based on the Kohonen approach, 
+			but combines characteristics from both supervised and unsupervised learning, i.e. CP-ANNs can be used to build both regression or classification models. CP-ANNs of the <strong>Kohonen and CP-ANN toolbox</strong> are able to build just classification models, where classification consists in finding a mathematical model 
+			able to recognize the membership of each object (sample) to its proper class on the basis of a series of measurements (the classes must be defined a priori). To do so, an output layer is added to the Kohonen ANN:<BR>
+		    <BR>
+			<center>
+			  <img src="theory_cpann.gif" width="350" height="402" border="1">
+			  </center>
+			<BR>
+			Counterpropagation Artificial Neural Networks can be considered as an extension of Kohonen maps. A CP-ANN consists of two layers, a Kohonen layer and an output layer (also called Grosberg layer). When dealing with supervised classification, the class vector is unfolded into a matrix <strong>C</strong>, with <em>I</em> rows and <em>G</em> columns (the unfolded class information), where <em>I</em> is the number of samples and <em>G</em> the total number of classes; each entry <em>c<sub>ig</sub></em> of <strong>C</strong> represents the membership of the i-th object to the g-th class expressed with a binary code (0 or 1). Then, the weights of the r-th neuron in the output layer (<strong>y</strong><sub><i>r</i></sub>) are updated in a supervised manner on the basis of the winning neuron selected in the Kohonen layer. Considering the class of each sample <em>i</em>, the update is calculated as follows:<br>
+            <center>
+                <img src="theory_formula_3.gif" width="229" height="59">
+            </center>
+            where <em>d</em><sub><i>r</i></sub> is the topological distance between the considered neuron <em>r</em> and the winning neuron selected in the Kohonen layer; <em>c</em><sub><i>i</i></sub> is the i-th row of the unfolded class matrix <strong>C</strong>, that is, a G-dimensional binary vector representing the class membership of the i-th sample.<br>
+            At the end of the network training, each neuron of the Kohonen layer <a href="start_example.htm" class="lnk_text">can be assigned to a class on the basis of the output weights</a> and all the samples placed in that neuron are automatically assigned to the corresponding class. As a consequence, CP-ANNs are also able to recognize samples belonging to none of the class spaces. This happens when samples are placed in neurons whose output weights are similar, that is, the neuron cannot be assigned to a specific class.<br>
+            The <strong>Kohonen and CP-ANN toolbox</strong> builds CP-ANNs in the same way as described in the following paper:<BR>
+
+			<BR>
+			Zupan J, Novic M, Ruis&aacute;nchez I. (<strong>1997</strong>) Kohonen and counterpropagation artificial neural networks in analytical chemistry. <em>Chemometrics and Intelligent Laboratory Systems</em> <strong>38</strong> 1-23.<BR>
+            <BR>
+In order to build classification models by menas of CP-ANNs maps, read <a href="cpann.htm" class="lnk_text">how to do that with the <strong>Kohonen and CP-ANN toolbox</strong></a>.<BR>
+		    <BR>
+			[<a href="#top" class="lnk_text">-> top</a>]
+			<BR>
+			<BR>
+            <a name="sub_4" id="sub_4"></a> <BR>
+            <span class="title_paragraph">Supervised Kohonen networks (SKN)</span><BR>
+            <BR>
+            Supervised Kohonen networks (SKN) are supervised methods for building classification models. In Supervised Kohonen networks (SKNs), the input map and the output map are &lsquo;glued&rsquo; together and forming a combined input-output map that is updated accordingly to the kohonen maps training scheme. Each input vector X (x1,x2,&hellip;,xp) and its corresponding output vector Y (y1,y2,&hellip;) are linked together to serve as input for the shared kohonen network.
+In order to achieve a model with good predictive performances, the input and output variables in the training set should be scaled properly; a scaling coefficient (scalar) for output vector (Y) is used here for tuning the influence of output variables on building the classification model.<br>
+<BR>
+<center>
+  <img src="theory_skn.gif" width="350" height="291" border="1">
+</center>
+<BR>
+An useful paper on Supervised Kohonen networks: <BR>
+<BR>
+Melssen W., Wehrens R., Buydens L. (<strong>2006</strong>) Supervised Kohonen networks for classification problems. <em>Chemometrics and Intelligent Laboratory Systems</em> <strong>83</strong> 99-113.<BR>
+<BR>
+The <strong>Kohonen and CP-ANN toolbox</strong> builds Supervised Kohonen networks in the same way as described in this paper. In order to build classification models by menas of Supervised Kohonen networks maps, read <a href="skn.htm" class="lnk_text">how to do that with the <strong>Kohonen and CP-ANN toolbox</strong></a>.<BR>
+<BR>
+[<a href="#top" class="lnk_text">-> top</a>] <BR>
+			<BR>
+            <a name="sub_5" id="sub_5"></a> <BR>
+            <span class="title_paragraph">XY-fused networks (XYF)</span><BR>
+            <BR>
+XY-fused networks (XYF) are supervised methods for building classification models. In XY-fused networks (XYFs), similarity of the input vector with input map (Sx) and  similarity of output vector with the output map (Sy) are calculated separately and then fused together to form a fused similarity (Sfused). The fused siumilarity is then used for finding the winner neuron. Influence of Sx on Sfused decreases linearly in epochs, while effect of Sy on Sfused increases linearly in epochs. Accordingly, at the initial stage of the training the similarity between the input objects X and the neurons in the input map dominates in generation of top map (determination of the winner). At the final stage of training, similarity of the output vector and output map controls the top map generation. In this way, both similarities from input and output map is shared equally for training of the network.<BR>
+<BR>
+<center>
+  <img src="theory_xyf.gif" width="350" height="402" border="1">
+</center>
+<BR>
+An useful paper on XY-fused networks: <BR>
+<BR>
+Melssen W., Wehrens R., Buydens L. (<strong>2006</strong>) Supervised Kohonen networks for classification problems. <em>Chemometrics and Intelligent Laboratory Systems</em> <strong>83</strong> 99-113.<BR>
+<BR>
+The <strong>Kohonen and CP-ANN toolbox</strong> builds XY-fused networks in the same way as described in this paper. In order to build classification models by menas of XY-fused networks, read <a href="xyf.htm" class="lnk_text">how to do that with the <strong>Kohonen and CP-ANN toolbox</strong></a>.<BR>
+<BR>
+[<a href="#top" class="lnk_text">-> top</a>] <BR>
+<BR>
+<BR>
+&nbsp;  	     
+		 </center>
+            </div>
+  
+		  </div></td>
+  		</tr>
+	  </table>
+
+    </div>
+
+    <div id="footer">
+		<iframe src="footer.htm" width="700" height="13" scrolling="no" frameborder="0">
+  			no i_frames allowed :: change browser
+	  	</iframe>
+	</div>
+</div>
+</body>
+</html>

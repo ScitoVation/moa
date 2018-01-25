@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>Kohonen and CPANN toolbox</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="generator" content="HAPedit 3.0">
+
+<link href = "style_structure.css" rel="stylesheet" type="text/css">
+<link href = "style_text.css" rel="stylesheet" type="text/css">
+<link href = "style_tables.css" rel="stylesheet" type="text/css">
+
+<style type="text/css">
+<!--
+.style1 {	color: #FF0000;
+	font-weight: bold;
+}
+.style2 {color: #FF0000}
+-->
+</style>
+</head>
+<body>
+<div id="container">
+<a name="top"></a>
+
+    <div id="header">
+		<iframe src="header.htm" width="740" height="60" scrolling="no" frameborder="0">
+  			no i_frames allowed :: change browser
+	  	</iframe>
+    </div>
+
+    <div id="content">
+
+		<table width="740" border="0" cellpadding="0" cellspacing="0">
+  		<tr>
+		<td width="150" valign="top">
+		
+		<iframe src="menu_lateral.htm" width="135" height="340" scrolling="no" frameborder="0">
+  			no i_frames allowed :: change browser
+	  	</iframe>
+		
+		</td>
+
+    	<td valign="top">
+	           <div align="justify">
+		           <div id="tab_duo_contenitor" class="text">
+		      <span class="title_page">Model optimisation</span> 		
+		      <BR>
+		      <BR>
+      
+		    <div id="tab_duo_text">
+                <div id="tab_space_lateral"><a href="#sub_0" class="lnk_text">Select the optimal number of neurons and epochs by means of Genetich Algorithms</a></div>
+	            <div id="tab_space_lateral"><a href="#sub_1" class="lnk_text">Optimise model with graphical interface</a></div>
+	            <div id="tab_space_lateral"><a href="#sub_2" class="lnk_text">Optimise model with MATLAB command window </a></div>
+	            <div id="tab_space_lateral"><a href="#sub_3" class="lnk_text">Interpret the optimisation results</a></div>
+	   	        </div>
+      
+	        <BR>
+	          <a name="sub_0"></a>
+		      <BR>
+		      
+		    <span class="title_paragraph">Select the optimal number of neurons and epochs by means of Genetich Algorithms</span>
+		      <BR>
+		      <BR>
+		      <a href="cpann.htm" class="lnk_text">Counter-Propagation Artificial Neural Networks</a> (CP-ANNs), as well as <a href="skn.htm" class="lnk_text">Supervised Kohonen networks</a> and		      <a href="xyf.htm" class="lnk_text">XY-fused networks</a>, require an optimisation step in order to choose the most suitable network architecture. In this toolbox, a new strategy for the selection of the optimal number of epochs and neurons of these supervised models is provided. This strategy exploits the ability of Genetic Algorithms to optimize network parameters. <BR><BR>
+		      <span class="style1">PAY ATTENTION</span>: details on the GA strategy to optimise the number of neurons and epochs used in this toolbox are given in the following paper: <BR><BR>
+		      Ballabio D., Vasighi M., Consonni V.,  Kompany-Zareh M. (<strong>2010</strong>) Genetic Algorithms for architecture optimisation of Counter-Propagation Artificial Neural Networks. In press on <em>Chemometrics and Intelligent Laboratory Systems</em><BR>
+		          <BR>
+			      [<a href="#top" class="lnk_text">-> top</a>]<BR>
+			      
+		        <BR>
+		          <a name="sub_1"></a>
+		          <BR>
+		          
+		        <span class="title_paragraph">Optimise model with the graphical interface</span>
+		          <BR>
+		          <BR>
+		          The optimisation of supervised models can be run in the <a href="gui.htm" class="lnk_text">GUI interface</a>, by choosing &quot;optimse model&quot; in the calculation menu. This option will be available only if data and class are laoded. The following form will appear:<BR>
+		          <center>
+		          <img src="opt_1.gif" width="448" height="317">
+		          </center>
+		          In this form the optimisation settings can be selected. First of all, the model type must be chosen in between Counterpropagation Artificial Neural networs (CP-ANNs), Supervised Kohonen networks, XY-fused networks, that are supervised methods.<br>
+		          The number of neurons and epochs to be optimised must be set. The number of neurons is the number of neurons for each side of the map. Taking into consideration that the map is a square, if you enter 7, you'lle get a total number of neurons equal to 7*7 = 49. The number of epochs defines the number of times the objects will be introduced in the net. In order to change the number of neurons and epochs to be optimised, just click on the corresponding edit buttons. <br>
+		          The topology condition ('square' or 'hexagonal') can be selected. If you select the 'hexagonal' topology togheter with a toroidal boundary condition, you must define an even number of neurons.<br>
+		          The validation settings must be chosen in the corresponding frame. Cross validation can be performed with venetian blinds, contiguous blocks or random test sets, each comprising the 20% of training samples. Regarding venetian blinds, with 3 cross-validation groups the split of the first group in venetian blinds will be [t,0,0,t,0,0,....,t,0,0], while the second one will be [0,t,0,0,t,0,....,0,t,0], and so on. On the other hand, the split of the first group with contiguous blocks will be [t,t,t,t,0,0,....,0,0,0] and so on. The number of groups must be defined (default value is 10). It defines the number of cv groups or the number of random sets and corresponds to the number of GA runs.<br>
+		          Besides this basic settings, the user can also change the advanced settings by clicking on the &quot;show advanced settings&quot; button. The &quot;repeat each model&quot; menu defines the times each classification model is repeated. This was made 
+		          in order to avoid unstable solutions due to random initialisation of SOM weights (if choosen) and random entering of samples into the net. Moreover, the user can define the optimisation function to be used in the GA evolution (NER on the test set or balanced NER on the test set). When dealing with classification issues, the fitness function is generally calculated for each model as the percentage of correctly assigned samples in cross-validation or on external test sets of samples. Even if this procedure enables the selection of predictive models, CP-ANNs are often characterised by the presence of overfitting due to large numbers of epochs and neurons. For this reason, a new fitness function (balanced NER on the test set) able to simultaneously evaluate the presence of predictive and not-overfitted models is introduced in the toolbox. Consider to split the available training samples in two sets: a calibration set (used to fit the model) and an internal validation set, used just to test the model built with the calibration set; the fitness function (<em>F</em>) is calculated as the following:
+		            <center>
+		          <img src="opt_3.gif" width="250" height="28">
+		          </center> 
+		          where <em>NERvalid</em> is the percentage of correctly assigned samples (Non-Error Rate, also known as accuracy or classification rate) calculated on the internal validation set, while <em>NERcalib</em> is the percentage of correctly assigned calibration samples.		            For further info on this optimisation index, read  the following paper: 
+                    Ballabio D., Vasighi M., Consonni V.,  Kompany-Zareh M. (<strong>2010</strong>) Genetic Algorithms for architecture optimisation of Counter-Propagation Artificial Neural Networks. In press on <em>Chemometrics and Intelligent Laboratory Systems</em>.<BR>
+		            The other advanced settings are <a href="start.htm" class="lnk_text">thoroughly explained in the start section</a>.<br>
+		            <BR>
+			      [<a href="#top" class="lnk_text">-> top</a>]
+		          <BR>
+		          <BR> 
+		          <a name="sub_2"></a>
+		          <BR>
+		          
+		          <span class="title_paragraph">Optimise model with MATLAB command window</span>
+		          <BR>
+		          <BR>
+		          The optimisation of supervised models can be also run in the MATLAB command window  by means of the opt_model function. Type &quot;help opt_model&quot; in the MATLAB command window for help on this routine and consider that all the settings required are similar to the ones explained in the <a href="#sub_1" class="lnk_text">previous section</a>. <BR>
+		          <BR>
+		          [<a href="#top" class="lnk_text">-> top</a>] <BR>
+		          <BR>
+		          <a name="sub_3"></a>
+		          <BR>
+		          
+		          <span class="title_paragraph">Interpret the optimisation results</span>
+		          <BR>
+		          <BR>
+		          Once the optimisation has been performed, the optimisation results can be easily saved/loaded and analysed in the  GUI. Results can be saved/loaded by clicking &quot;file-&gt;save/load optimisation&quot;. To see the results, you must click &quot;results-&gt;view optimisation results&quot;; the following form will appear: <BR>
+				   </p>
+		          </div>
+          </div>          
+               <div align="justify">
+                 <div id="tab_duo_contenitor" class="text">		       <center><img src="opt_2.gif" width="568" height="337"></center>	          
+                   In the bubble plot, the GA chromosomes are shown with their relative frequency of selection in the  GA runs and the mean value of the fitness function. Each bubble represents a chromosome, that is, a network architecture. The dimension of each bubble is proportional to the network size, that is, the number of neurons encoded in the chromosome. The colour of the bubbles is proportional to the number of epochs, that is, the darker the bubble, the higher the number of epochs used to train the network. The dotted line represents the overall mean of frequencies and fitness function values. Therefore, this plot enables qualitative interpretation of the results: architectures placed in the right upper part of the plot are appropriate, since they are characterized by high relative frequencies of selection and high predictive performances; on the other side, architectures placed in the left upper part of the plot have high predictive performances but their frequency of selection in repeated GA runs is small, that is, they are useful to correctly predict only some internal validation sets. As a consequence, the architectures placed on the right limit of the plot can be considered as the most suitable ones. <BR>
+	          The list of all the represented architectures, with their number of neurons, epochs, frequency of selection in the GA runs and average of fitness function can be seen by clicking the &quot;view results in table&quot; button. By clicking the &quot;select&quot; button, it's possible to select a specific bubble (architecture) in the plot and see its corresponding numbers of epochs and neruons, frequency of selection and values of fitness function.<BR>
+	          For further info how to interpret the bubble plot, read  the following paper: Ballabio D., Vasighi M., Consonni V.,  Kompany-Zareh M. (<strong>2010</strong>) Genetic Algorithms for architecture optimisation of Counter-Propagation Artificial Neural Networks. In press on <em>Chemometrics and Intelligent Laboratory Systems</em>.<BR>
+		      <BR>
+		      [<a href="#top" class="lnk_text">-> top</a>] <BR><BR>
+                <BR>
+                 </div>
+               </div>
+               <div class="text"></div></td>
+  		</tr>
+	  </table>
+
+    </div>
+
+    <div id="footer">
+		<iframe src="footer.htm" width="700" height="13" scrolling="no" frameborder="0">
+  			no i_frames allowed :: change browser
+	  	</iframe>
+	</div>
+</div>
+</body>
+</html>

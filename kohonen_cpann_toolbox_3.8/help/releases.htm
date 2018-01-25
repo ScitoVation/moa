@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>Kohonen and CPANN toolbox</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="generator" content="HAPedit 3.0">
+
+<link href = "style_structure.css" rel="stylesheet" type="text/css">
+<link href = "style_text.css" rel="stylesheet" type="text/css">
+<link href = "style_tables.css" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+<div id="container">
+<a name="top"></a>
+
+    <div id="header">
+		<iframe src="header.htm" width="740" height="60" scrolling="no" frameborder="0">
+  			no i_frames allowed :: change browser
+	  	</iframe>
+    </div>
+
+    <div id="content">
+
+		<table width="740" border="0" cellpadding="0" cellspacing="0">
+  		<tr>
+		<td width="150" valign="top">
+		
+		<iframe src="menu_lateral.htm" width="135" height="340" scrolling="no" frameborder="0">
+  			no i_frames allowed :: change browser
+	  	</iframe>
+		
+		</td>
+
+    	<td valign="top">
+
+		  <div align="justify">
+		    <div id="tab_duo_contenitor" class="text">
+		    <span class="title_page">Releases</span>		
+		    <BR>
+		    <BR>
+    
+		<div id="tab_duo_text">
+		      <div id="tab_space_lateral"><a href="#sub_1" class="lnk_text">What's new in  version 3 </a></div>
+			  <div id="tab_space_lateral"><a href="#sub_2" class="lnk_text">What's new in  version 2 </a></div>
+	   	</div>
+		    </div>
+		    <div class="text">
+		    <p><BR>
+              <a name="sub_1"></a> <BR>
+              <span class="title_paragraph">What's new in version 3 </span> <BR>
+              <BR>
+In the toolbox version 3, two new supervised methods based on Kohonen maps have been added: <a href="skn.htm" class="lnk_text">Supervised Kohonen networks (SKN)</a> and <a href="xyf.htm" class="lnk_text">XY-fused Networks (XY-F)</a>. Have also a look at the <a href="theory.htm" class="lnk_text">theory section</a> for info on these methods. <BR>
+<BR>
+
+Beside the sequential training, the algorithm for the batch training of the weights has been introduced. Details are given <a href="start.htm#sub_2" class="lnk_text">here</a>. <BR>
+<BR>
+The hexagonal map topology has been added. It can be defined 
+in the <a href="start.htm" class="lnk_text">setting structure</a> or directly in the <a href="gui.htm" class="lnk_text">GUI interface</a>. The Kohonen weights can be initialised both randomly or on the base of the  eigenvectors corresponding to the two largest principal components of input data. Details are given <a href="start.htm" class="lnk_text">here</a>.<BR>
+<BR>
+A new strategy for the selection of the optimal number of epochs and neurons of  supervised models is introduced in the toolbox version 3. This strategy exploits the ability of Genetic Algorithms to optimize network parameters. Have a look <a href="optimisation.htm" class="lnk_text">here</a> for further info. <BR><BR>
+
+External samples (not used to build a model)  can now be seen in the top map of the <a href="gui.htm" class="lnk_text">GUI interface</a>. If a class vector is loaded for external samples, the corresponding classification parameter are calculated. ROC curves are calculated on each class by changing the threshold over the output weights. In the PCA analysis on the Kohonen weights, it is possible to draw Voronoi regions on the PCA score space. Prediction of external samples can be saved to the matlab workspace as matlab structures (see <a href="gui.htm" class="lnk_text">here</a> for details).<BR>
+<BR>
+The calculation of the <a href="classparameters.htm" class="lnk_text">error rate and non-error rate</a> of the model was changed. The time consuption for the calculation of models has been 50% reduced.<BR>
+<BR>
+A form for plotting boxplots, histograms and biplots of variables has been added in the &quot;<a href="gui.htm" class="lnk_text">view</a>&quot; menu of the GUI.<BR>
+<BR>
+		        <a name="sub_2" id="sub_2"></a>
+		        <BR>
+		      
+		      <span class="title_paragraph">What's new in version 2 </span>
+		        <BR>
+		        <BR>
+			  In the toolbox version 2, a GUI graphical interface has been added. The graphical interface enables you to do all the steps of the analysis
+(data loading, seting preparation, model calculation, sample
+prediction, cross-validation). If you wish to use the graphical
+interface, <a href="file:///E:/ricerca/matlab/kohonen_cpann_toolbox_2.0/help/gui.htm" class="lnk_text">read the GUI help section</a>. <BR>
+		      <BR>
+		      Data can now be scaled. However, the scaled data are then always range scaled inbetween 0 and 1, in order to make them comparable with the net weights. Look the <a href="start.htm" class="lnk_text">setting section</a> for further information. <BR>
+		      <BR>
+			  In the <a href="start.htm" class="lnk_text">setting structure</a>, the field &quot;a_chg&quot; has been removed. It was the settings for deciding if the learning rate was proportional to epochs ('to_epo') or epochs*samples ('to_epoobj'); the default value now is always set to 'to_epo'. 
+			  
+			  <BR><BR>Two new fields have been added in the setting structure: &quot;show_bar&quot; enables the user to see (not see) a waiting bar during the calculation of the model; &quot;absolute_range&quot; enables the range scaling to be classical (separatly on each column) or absolute (with the absolute maximum and minimum values of the dataset): read the <a href="start.htm" class="lnk_text">how to start</a> section, where a graphical example on the absolute range scaling is shown. <BR>
+			  <BR>
+			  When calculating (and cross validating) Counterpropagation ANNs, the class weights are now saved. Look the <a href="cpann.htm" class="lnk_text">CP-ANNs section</a> for further details.
+			  
+			  <BR><BR>In the GUI for visualizing the results, now it's possibile to calculate Principal Component Analysis on the Kohonen weights. Look the <a href="cpann.htm" class="lnk_text">corresponding help section</a> for further info. <BR><BR>
+			  Now <a href="cpann.htm" class="lnk_text">cross-validation</a> (only for CP-ANNs) can be performed both with venetian blinds and contiguous blocks. <BR><BR>
+			  An extended explanation of the classification parameters (such as error rate, non-error rate, specificity, sensitivity, etc...) has been added in the help section, <a href="classparameters.htm" class="lnk_text">here</a>.<BR>
+	            <BR>
+	            [<a href="#top" class="lnk_text">-> top</a>] <BR>
+
+			    <BR>
+&nbsp;  	     
+              </p>
+		    </div>
+  
+		  </div></td>
+  		</tr>
+	  </table>
+
+    </div>
+
+    <div id="footer">
+		<iframe src="footer.htm" width="700" height="13" scrolling="no" frameborder="0">
+  			no i_frames allowed :: change browser
+	  	</iframe>
+	</div>
+</div>
+</body>
+</html>

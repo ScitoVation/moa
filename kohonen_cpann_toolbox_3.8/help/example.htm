@@ -1,0 +1,294 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>Kohonen and CPANN toolbox</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="generator" content="HAPedit 3.0">
+
+<link href = "style_structure.css" rel="stylesheet" type="text/css">
+<link href = "style_text.css" rel="stylesheet" type="text/css">
+<link href = "style_tables.css" rel="stylesheet" type="text/css">
+
+<style type="text/css">
+<!--
+.style1 {
+	color: #FF0000;
+	font-weight: bold;
+}
+-->
+</style>
+</head>
+<body>
+<div id="container">
+<a name="top"></a>
+
+    <div id="header">
+		<iframe src="header.htm" width="740" height="60" scrolling="no" frameborder="0">
+  			no i_frames allowed :: change browser
+	  	</iframe>
+    </div>
+
+    <div id="content">
+
+		<table width="740" border="0" cellpadding="0" cellspacing="0">
+  		<tr>
+		<td width="150" valign="top">
+		
+		<iframe src="menu_lateral.htm" width="135" height="340" scrolling="no" frameborder="0">
+  			no i_frames allowed :: change browser
+	  	</iframe>
+		
+		</td>
+
+    	<td valign="top">
+
+		  <div align="justify">
+		    <div id="tab_duo_contenitor" class="text">
+		    <span class="title_page">Example</span>		
+		    <BR>
+		    <BR>
+    
+		<div id="tab_duo_text">
+			  <div id="tab_space_lateral"><a href="#sub_0" class="lnk_text">The IRIS dataset </a></div>
+			  <div id="tab_space_lateral"><a href="#sub_0bis" class="lnk_text">Working with the graphical interface</a></div>
+		      <div id="tab_space_lateral"><a href="#sub_1" class="lnk_text">Working with the command line</a></div>
+		      <div id="tab_space_lateral"><a href="#sub_2" class="lnk_text">Graphical results on the command line </a></div>
+		      <div id="tab_space_lateral"><a href="#sub_3" class="lnk_text">Cross validating the model on the command line</a></div>
+	   	</div>
+    <BR><a name="sub_0" id="sub_0"></a>
+		    <BR>
+		    
+		<span class="title_paragraph">The IRIS dataset</span>
+		    <BR>
+		    <BR>
+		    <a href="example_irisdata.htm" class="lnk_text">IRIS</a> is a classical data set used by statisticians and chemometricians to check classification methods. It is composed by 150 samples of flowers divided into 3 classes (50 setosa, 50 versicolor, 50 virginica) and described by 4 variables (petal length, petal width, sepal length, sepal width). The dataset has been published by Fisher in the following paper: 
+			<BR>
+			<BR>
+			Fisher RA. (<strong>1936</strong>) The use of multiple measurements in taxonomic problems. <em>Annals of Eugenics</em> <strong>7</strong> 179-188.
+			
+			
+			<BR>
+			<BR>[<a href="#top" class="lnk_text">-> top</a>]<BR>
+		<BR><a name="sub_0bis" id="sub_0"></a>
+		    <BR>
+		    
+		<span class="title_paragraph">Working with the graphical interface</span><BR>
+		    <BR>
+		    Once <a href="start.htm#sub_1" class="lnk_text">data</a> have been prepeared, you can open the graphical interface by typing the following code in the MATLAB command window: <BR>
+            <BR>
+            <div id="tab_duo_text" class="text_math"> model_gui</div>
+            <BR> 
+            In order to build a classification model by means of CP-ANNs, we have to load data and class vector. In order to do that, we can proceed in the following way: select &quot;load data&quot; in the file menu, then &quot;load from file&quot; in the &quot;load&quot; form and select the iris.mat file, the following form will appear:<BR>
+            <center><img src="example_cpann_gui_1.gif" width="388" height="202"></center><BR>
+            We can select the X matlab variable (the data) and click load. The listbox of the toolbox main form will be updated with the data details (number of samples, number of variables). Then we can follow the same procedure for loading the corresponding class vector (from the same iris file), by clicking &quot;load class &quot; in the file menu. The class details (number of samples, number of classes) will be updated in the toolbox main form. <BR>
+			<center>
+			<img src="example_cpann_gui_2.gif" width="518" height="217">
+			</center>
+			We can now proceed in the calculation of the classification model by clicking the &quot;calculate model&quot; button. The &quot;model settings&quot; form will appear. <BR>
+			<center>
+              <img src="example_cpann_gui_3.gif" width="447" height="283">            </center>
+			We define the model type (counterpropagation),  the number of epochs (50), the size of the net (11), the type of cross-validation (venetian blinds), and the number of cv groups (3). Then we can press the &quot;calculate model&quot; button and wait. The number of neurons and epochs was arbitrarly chosen in this example but consider that in this toolbox, a new strategy for the selection of the optimal number of epochs and neurons of classification  models is provided. <a href="optimisation.htm" class="lnk_text">Read the corresponding help section here</a>.<BR>
+			After the model calculation (and cross-validation), the main form of the toolbox will be updated with the model details (number of neurons, number of epochs, error rate and non-error rate): <BR>
+			<center>
+			<img src="example_cpann_gui_4.gif" width="515" height="215">
+			</center>
+			In this case, the error rate of our model is equal to 0.01 (1%). <span class="style1">PAY ATTENTION</span>: when CP-ANNs (al well as XYF, SKN and Kohonen maps) are <a href="start.htm#init" class="lnk_text">randomly initialised</a> or the <a href="start.htm#training" class="lnk_text">training algorithm</a> is sequential,  each model you build will be different, even if repeated. On the other side, the batch training algorithm in association with the eigenvector initialisation of weights give always the same map results, since randomisation is avoided.<BR>
+			Detailed classification results can be analysed by clicking on the &quot;classification results&quot; button. The following form will appear:<BR><BR>
+			<center>
+              <img src="example_cpann_gui_5.gif" width="375" height="370">            </center><BR>
+			Considering <a href="classparameters.htm" class="lnk_text">precision, specificity and sensitivity</a>, class 1 results prefectly separated, while class 2 and class 3 overlaps a little bit (both in fitting and cross-validation). This is confirmed by the <a href="classparameters.htm" class="lnk_text">confusion matrix</a> obtained in cross-validation (click the &quot;view confusion matrix&quot; button in the cross-validation frame):<BR>
+			<center>
+			<img src="example_cpann_gui_6.gif" width="380" height="239">
+			</center>
+			The last column refers to the number of not assigned samples. <BR>
+			Clicking on the &quot;plot class profiles&quot; button, the following plot will appear: <BR>
+			<center>
+              <img src="example_cpann_gui_7.gif" width="513" height="385">            </center><BR>
+			where the average of the Kohonen weights for each class and for each variable are shown. So, for example, we can see that class 1 (the best separated one) has a significative difference on the third and fourth variables with respect to the others two classes, that have more similar values. <BR>
+			The overlap between class 2 and class 3 is confirmed as well from the <a href="classparameters.htm" class="lnk_text">ROC curves</a> of the classes. The ROC curve plots can be opened with the &quot;plot ROC curve&quot; button.<BR>
+            <center>
+              <img src="example_cpann_gui_8.gif" width="539" height="413">                          </center>
+  			Then, we can have a look to the top map (by clicking &quot;view top map&quot; in the toolbox main form), where it is possible to visualize the samples on the top map, the Kohonen weights, the output weights and calculate  PCA on the weights. Details on how to interpret the &quot;top map&quot; form are given <a href="#sub_2" class="lnk_text">in the next paragraphs</a>.<BR>
+			Finally, we can save the model (&quot;file-&gt;save model&quot;), clear the data (&quot;file-&gt;clear data&quot;), and upload a new set of data (&quot;file-&gt;load data&quot;). In this case, the &quot;predict sample&quot; button will be activated and the prediction results on the new set of data can be analysed.<BR>
+			<BR>[<a href="#top" class="lnk_text">-> top</a>]<BR>
+		    <BR><a name="sub_1" id="sub_0"></a>
+		    <BR>
+		    
+		<span class="title_paragraph">Working with the command line</span><BR>
+		    <BR>
+			Type:<BR>
+		    <BR>
+			
+			<div id="tab_duo_text" class="text_math">
+		      load iris </div>
+			<BR>
+
+		    on the MATLAB command window to load the data. Then, we can build a defualt setting structure, define the number of epochs (50) and the size of the net (11) and have a look to the final setting structure:
+			<BR>
+		    <BR>
+			
+			<div id="tab_duo_text" class="text_math">
+		      settings = som_settings('cpann'); <BR>
+			  settings.epochs = 50;<BR>
+			  settings.nsize = 11;<BR>
+			  settings
+			</div>
+			<BR>
+
+		    After that, we can run the classification model based on CP-ANNs by typing:
+			<BR>
+		    <BR>
+			
+			<div id="tab_duo_text" class="text_math">
+		      model = model_cpann(X,class,settings);
+			</div>
+			<BR>
+			
+		    At the end of the calculation, we will have a structure (model) that contains all the <a href="classparameters.htm" class="lnk_text">classification results</a>.
+			We can evaluate the quality of the classification model by looking at the classification indices (non-error rate, error rate, etc..):
+			<BR>
+		    <BR>
+			
+			<div id="tab_duo_text" class="text_math">
+		      model.res.class_param
+			</div>
+			<BR>  
+			We'll get something like this in the MATLAB command window (<span class="style1">PAY ATTENTION</span>: since CP-ANNs can be <a href="start.htm#init" class="lnk_text">randomly initialised</a> and samples enter randomly in the net in each epoch, each model you build will be different, even if repeated): 
+			<BR>
+		    <BR>
+			
+			<div id="tab_duo_text" class="text_math">
+			ans = 
+			  <p> conf_mat: [3x4 double]<br>
+  ner: 0.9933<br>
+  er: 0.0067<br>
+  not_ass: 0<br>
+  precision: [1 0.9804 1]<br>
+  sensitivity: [1 1 0.9800]<br>
+  specificity: [1 0.9900 1]<BR>
+			</p>
+			  </div>
+					<BR>
+		    This means that the error rate of our model is equal to 0.0067 (let's say 0.01, i.e. 1%); considering precision, specificity and sensitivity, class 1 results prefectly separated, while class 2 and class 3 overlaps a little bit. This is confirmed by the confusion matrix:
+			<BR>
+			<BR>
+			<div id="tab_duo_text" class="text_math">
+			model.res.class_param.conf_mat<BR><BR>
+
+			ans =<BR><BR>
+
+   			 50&nbsp;&nbsp;&nbsp;&nbsp;0&nbsp;&nbsp;&nbsp;&nbsp;     0&nbsp;&nbsp;&nbsp;&nbsp;     0<BR>
+    			 0&nbsp;&nbsp;&nbsp;&nbsp; 50    &nbsp;&nbsp;&nbsp;0&nbsp;&nbsp;&nbsp;&nbsp;     0<BR>
+     			0&nbsp;&nbsp;&nbsp;&nbsp;     1&nbsp;&nbsp;&nbsp;&nbsp;    49&nbsp;&nbsp;&nbsp;&nbsp;     0<BR>
+			</div>
+
+		    <BR>
+			We can also analyse the top map position of the samples and the map weights on the MATLAB command window, but it would be better to do that by using the GUI interface (see next paragraph).
+		    <BR>
+		    <BR>
+			[<a href="#top" class="lnk_text">-> top</a>]
+		    <BR>
+		    <BR> <a name="sub_2"></a>
+		    <BR>
+		    
+		<span class="title_paragraph">Graphical results on the command line</span><BR>
+		    <BR>
+		    Open the GUI interface by typing:
+			<BR>
+		    <BR>
+			
+			<div id="tab_duo_text" class="text_math">
+		      visualize_model(model)
+			</div>
+			<BR>
+			Then, we can inspect the results. For example, we can plot the class labels and the weights of the third variable (by selectin 'class labels' in the Display labels combo, 'variable 3' in the Display weights combo) and verify that this variable has low values in the samples of the first class:
+		    <BR>
+		    <BR>
+			<center>
+			<img src="example_visualize_1.gif" width="550" height="450">
+			</center>
+		    <BR>
+			After that, we can have a look to the output weights of class 1 (of course, neurons where samples of class 1 are placed will have high weights).
+		    <BR>
+		    <BR>
+			<center>
+			<img src="example_visualize_2.gif" width="550" height="450">
+			</center>
+		    <BR>
+			Again, we can look at the assignment of each neuron (i.e. each neuron will be coloured on the basis of the assigned class).<BR>
+		    <BR>
+			<center>
+			<img src="example_visualize_3.gif" width="550" height="450">
+			</center>	    
+				<BR>
+			Finally, we can look at the weights of a specific neuron and at the labels of the samples placed in that neuron by using the 'get neuron weights' and 'get neuron labels' buttons:
+		    <BR><BR>
+			<center>
+			<img src="example_visualize_4.gif" width="550" height="488">
+			</center>	    
+		    <BR>
+			<center>
+			<img src="example_visualize_5.gif" width="234" height="302">
+			</center>	    
+			<BR>
+			By clicking on &quot;PCA on weights&quot;, we can open a new gui (next picture) and calculate Principal Component Analysis (PCA) on the weights of the neural network, in order to examine the relationship between variables and neurons in a global way and not variable by variable. The weights of the Kohonen layer are arranged as a data matrix with r rows and p columns, where r is the number of neurons (11*11 in this example), p the number of variables (4 in this example).<BR>
+			<BR>
+			<center>
+			<img src="example_visualize_6.gif" width="550" height="553" border="1">			
+			</center>
+			<BR>
+			In the GUI it is possible to decide the scaling method (here mean centering) and colour the neurons in the score plot on the basis of the class assignments or on the basis of the weights of the output neurons with a gray scale. In this way it is possible to understand the relationship between variables and classes, i.e. how variables describe classes. In the shown picture, we plotted scores and laodings on the first two components (96% of explained variance). Each point in the score plot represents a neuron of the previous CP-ANN model. Then, each neuron is here coloured on the basis of the output weight of the first class: black neurons are those with an high weight, i.e. neurons with high probability to belong to the first class. On the other side, white neurons are those with low weight on the first class. So, comparing score and loading plot, it is easy to understand that the first class (neurons on the right of the score plot) is here characterized by the second variable (that is placed ont he right in the loading plot), while will have low value on variables 3 and 4 (on the left in the loading plot). Conclusions on classes 2 and 3 can be analysed by plotting the corresponding weights in the &quot;class&quot; combo list. When analysisng PCA on the Kohonen weights, it is also possible to draw <a href="voronoi.htm" class="lnk_text">Voronoi regions</a> related to each neuron in the score space. <BR>
+		    <BR>
+			[<a href="#top" class="lnk_text">-> top</a>]		    
+    		    <BR>
+		    <BR><a name="sub_3"></a>
+		    <BR>
+		    
+		<span class="title_paragraph">Cross validating the model on the command line</span>
+		    <BR>
+		    <BR>
+		    Finally, in order to cross-validate the model, we can use 3 cross validation groups divided by venetian blinds:
+			<BR>
+		    <BR>
+			
+			<div id="tab_duo_text" class="text_math">
+		      cv =  cv_cpann(X,class,settings,1,3);
+			</div>
+			<BR>
+			At the end of the calculation, we can look at the <a href="classparameters.htm" class="lnk_text">classification results</a> by typing cv.class_param:
+			<BR>
+		    <BR>
+			
+			<div id="tab_duo_text" class="text_math">
+		      cv.class_param<BR><BR>
+				ans:<BR><BR>
+       conf_mat: [3x4 double]<BR>
+            ner: 0.9500<BR>
+             er: 0.0500<BR>
+        not_ass: 0<BR>
+      precision: [1 0.92 0.92]<BR>
+    sensitivity: [1 0.92 0.92]<BR>
+    specificity: [1 0.96 0.96]
+			</div>
+		    <BR>
+		    <BR>
+			[<a href="#top" class="lnk_text">-> top</a>]
+			<BR>
+			<BR>
+			<BR>&nbsp;  	     
+		 </div>
+  
+		  </div></td>
+  		</tr>
+	  </table>
+
+    </div>
+
+    <div id="footer">
+		<iframe src="footer.htm" width="700" height="13" scrolling="no" frameborder="0">
+  			no i_frames allowed :: change browser
+	  	</iframe>
+	</div>
+</div>
+</body>
+</html>
